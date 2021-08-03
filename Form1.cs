@@ -28,6 +28,10 @@ namespace LaborBookXML
 
             labelFileDirectory.Text = openFileDialog.FileName;
 
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(openFileDialog.FileName);
+
+            ExcelParser.ParseFile(xlApp);
         }
     }
 }
