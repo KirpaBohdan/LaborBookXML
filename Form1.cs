@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Xml.Linq;
 
 namespace LaborBookXML
 {
@@ -17,6 +19,8 @@ namespace LaborBookXML
         {
             InitializeComponent();
         }
+
+        string xText;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -34,7 +38,23 @@ namespace LaborBookXML
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(openFileDialog.FileName);
 
                 ExcelParser.ParseFile(xlApp);
+
+                xText = ExcelParser.GetXmlDocuent();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            System.IO.File.WriteAllText("MyXmlFile", xText);
+
+            saveFileDialog.Filter = "xml file(*.xml)|*.xml";
+            saveFileDialog.OverwritePrompt = true;
+
+            saveFileDialog.ShowDialog();
+
+            File.WriteAllText(saveFileDialog.FileName, xText);
+
+            MessageBox.Show("Файл сохранен!");
         }
     }
 }
