@@ -26,12 +26,15 @@ namespace LaborBookXML
             openFileDialog.Filter = "Excel Files|*.xlsx;*.xlsm;*.xlsb;*.xltx;*.xltm;*.xls;*.xlt;*.xls;";
             openFileDialog.ShowDialog();
 
-            labelFileDirectory.Text = openFileDialog.FileName;
+            if (openFileDialog.FileName != "")
+            {
+                labelFileDirectory.Text = openFileDialog.FileName;
 
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(openFileDialog.FileName);
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(openFileDialog.FileName);
 
-            ExcelParser.ParseFile(xlApp);
+                ExcelParser.ParseFile(xlApp);
+            }
         }
     }
 }
