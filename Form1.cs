@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace LaborBookXML
 {
@@ -15,6 +16,18 @@ namespace LaborBookXML
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog.DefaultExt = ".xlsx";
+            openFileDialog.FileName = "";
+            openFileDialog.AddExtension = true;
+            openFileDialog.Filter = "Excel Files|*.xlsx;*.xlsm;*.xlsb;*.xltx;*.xltm;*.xls;*.xlt;*.xls;";
+            openFileDialog.ShowDialog();
+
+            labelFileDirectory.Text = openFileDialog.FileName;
+
         }
     }
 }
