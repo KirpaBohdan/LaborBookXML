@@ -45,10 +45,16 @@ namespace LaborBookXML
                     xText = ExcelParser.GetXmlDocuent();
 
                     if (ExcelParser.records.Count != 0)
+                    {
                         button2.Enabled = true;
+                        richTextBox1.Text = xText;
+                    }
                 }
                 else
+                {
                     button2.Enabled = false;
+                    richTextBox1.Text = "";
+                }
             }
         }
 

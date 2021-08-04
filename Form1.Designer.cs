@@ -34,6 +34,8 @@ namespace LaborBookXML
             this.labelFileDirectory = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.button2 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -53,7 +55,7 @@ namespace LaborBookXML
             // labelFileDirectory
             // 
             this.labelFileDirectory.AutoSize = true;
-            this.labelFileDirectory.Location = new System.Drawing.Point(110, 18);
+            this.labelFileDirectory.Location = new System.Drawing.Point(93, 18);
             this.labelFileDirectory.Name = "labelFileDirectory";
             this.labelFileDirectory.Size = new System.Drawing.Size(86, 13);
             this.labelFileDirectory.TabIndex = 1;
@@ -70,16 +72,36 @@ namespace LaborBookXML
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(241, 42);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(452, 401);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(595, 454);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Created by Kirpa B.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 476);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.labelFileDirectory);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "LaborBook";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,6 +114,8 @@ namespace LaborBookXML
         private System.Windows.Forms.Label labelFileDirectory;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
