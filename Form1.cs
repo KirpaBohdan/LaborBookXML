@@ -36,14 +36,19 @@ namespace LaborBookXML
 
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(openFileDialog.FileName);
-                
-                ExcelParser.FindHeaders(xlApp);
-                ExcelParser.ParseFile(xlApp);
 
-                xText = ExcelParser.GetXmlDocuent();
+                ExcelParser.namePositionPairs.Clear();
 
-                if(ExcelParser.records.Count != 0)
-                    button2.Enabled = true;
+                if (ExcelParser.FindHeaders(xlApp))
+                {
+                    ExcelParser.ParseFile(xlApp);
+                    xText = ExcelParser.GetXmlDocuent();
+
+                    if (ExcelParser.records.Count != 0)
+                        button2.Enabled = true;
+                }
+                else
+                    button2.Enabled = false;
             }
         }
 
@@ -57,9 +62,11 @@ namespace LaborBookXML
 
             saveFileDialog.ShowDialog();
 
-            File.WriteAllText(saveFileDialog.FileName, xText);
-
-            MessageBox.Show("Файл сохранен!");
+            if (saveFileDialog.FileName != "")
+            {
+                File.WriteAllText(saveFileDialog.FileName, xText);
+                MessageBox.Show("Файл сохранен!");
+            }
         }
     }
 }
