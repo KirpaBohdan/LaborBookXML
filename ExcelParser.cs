@@ -12,32 +12,44 @@ namespace LaborBookXML
 {
     class ExcelParser
     {
-        static List<Record> records = new List<Record>();
+        public static List<Record> records = new List<Record>();
 
+        static Excel.Worksheet sheet;
 
+        static Dictionary<string, int> namePositionPairs = new Dictionary<string, int>();
         public static void ParseFile(Excel.Application app)
         {
-            Excel.Worksheet sheet = app.Worksheets.get_Item(1);
-
-            for (int i = 2; i <= sheet.Rows.CurrentRegion.EntireRow.Count; i++)
+            sheet = app.Worksheets.get_Item(1);
+            try
             {
+                for (int i = 2; i <= sheet.Rows.CurrentRegion.EntireRow.Count; i++)
+                {
                 Record record = new Record();
-                record.EmployeerCode = sheet.Cells[i, 1].Value.ToString() ?? "";
-                record.EdrpoSign = sheet.Cells[i, 2].Value.ToString() ?? "";
-                record.NameSign = sheet.Cells[i, 3].Value.ToString();
-                record.EdrpoLR = sheet.Cells[i, 4].Value.ToString();
-                record.NameLR = sheet.Cells[i, 5].Value.ToString();
-                record.ActionType = Convert.ToInt32(sheet.Cells[i, 6].Value.ToString());
-                record.AttributeType = Convert.ToInt32(sheet.Cells[i, 7].Value.ToString() ?? "0");
-                record.ActionDT = Convert.ToDateTime(sheet.Cells[i, 8].Value.ToString() ?? "01.01.0001");
-                record.ActionText = sheet.Cells[i, 9].Value.ToString();
-                record.LeaveReason = Convert.ToString((sheet.Cells[i, 10]).Value ?? "");
-                record.DocType = sheet.Cells[i, 11].Value.ToString();
-                record.DocDT = Convert.ToDateTime(sheet.Cells[i, 12].Value.ToString() ?? "01.01.0001");
-                record.DocNumber = sheet.Cells[i, 13].Value.ToString();
 
-                records.Add(record);
+                //MessageBox.Show(sheet.Cells[i, namePositionPairs["EmployeerCode"]].Value.ToString());
+                
+                    record.EmployeerCode = sheet.Cells[i, namePositionPairs["EmployeerCode"]].Value.ToString() ?? "";
+                    record.EdrpoSign = sheet.Cells[i, namePositionPairs["EdrpoSign"]].Value.ToString();
+                    record.NameSign = sheet.Cells[i, namePositionPairs["NameSign"]].Value2.ToString();
+                    record.EdrpoLR = sheet.Cells[i, namePositionPairs["EdrpoLR"]].Value.ToString();
+                    record.NameLR = sheet.Cells[i, namePositionPairs["NameLR"]].Value.ToString();
+                    record.ActionType = Convert.ToInt32(sheet.Cells[i, namePositionPairs["ActionType"]].Value.ToString());
+                    record.AttributeType = Convert.ToInt32(sheet.Cells[i, namePositionPairs["AttributeType"]].Value.ToString());
+                    record.ActionDT = Convert.ToDateTime(sheet.Cells[i, namePositionPairs["ActionDT"]].Value.ToString());
+                    record.ActionText = sheet.Cells[i, namePositionPairs["ActionText"]].Value.ToString();
+                    record.LeaveReason = Convert.ToString(sheet.Cells[i, namePositionPairs["LeaveReason"]].Value2 ?? "");
+                    record.DocType = sheet.Cells[i, namePositionPairs["DocType"]].Value.ToString();
+                    record.DocDT = Convert.ToDateTime(sheet.Cells[i, namePositionPairs["DocDT"]].Value);
+                    record.DocNumber = sheet.Cells[i, namePositionPairs["DocNumber"]].Value.ToString();
 
+                    records.Add(record);
+                
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Неверные данные, проверте правильность ввода данных");
+                namePositionPairs.Clear();
             }
         }
 
@@ -82,5 +94,25 @@ namespace LaborBookXML
 
             return final;
         }
+        public static void FindHeaders(Excel.Application app)
+        {
+            sheet = app.Worksheets.get_Item(1);
+            //MessageBox.Show(sheet.Range["A1:M1"].Find("Employeer_Code").Column.ToString());
+            //Record.EmployeerCodeColumn = Convert.ToChar(sheet.Range["A1:M1"].Find("Employeer_Code").Address.Substring(1, 1));
+            namePositionPairs.Add("EmployeerCode", sheet.Range["A1:M1"].Find("Employeer_Code").Column);
+            namePositionPairs.Add("EdrpoSign", sheet.Range["A1:M1"].Find("Edrpo_Sign").Column);
+            namePositionPairs.Add("NameSign", sheet.Range["A1:M1"].Find("Name_Sign").Column);
+            namePositionPairs.Add("EdrpoLR", sheet.Range["A1:M1"].Find("Edrpo_LR").Column);
+            namePositionPairs.Add("NameLR", sheet.Range["A1:M1"].Find("Name_LR").Column);
+            namePositionPairs.Add("ActionType", sheet.Range["A1:M1"].Find("Action_Type").Column);
+            namePositionPairs.Add("AttributeType", sheet.Range["A1:M1"].Find("Attribute_Type").Column);
+            namePositionPairs.Add("ActionDT", sheet.Range["A1:M1"].Find("Action_DT").Column);
+            namePositionPairs.Add("ActionText", sheet.Range["A1:M1"].Find("Action_Text").Column);
+            namePositionPairs.Add("LeaveReason", sheet.Range["A1:M1"].Find("Leave_Reason").Column);
+            namePositionPairs.Add("DocType", sheet.Range["A1:M1"].Find("Doc_Type").Column);
+            namePositionPairs.Add("DocDT", sheet.Range["A1:M1"].Find("Doc_DT").Column);
+            namePositionPairs.Add("DocNumber", sheet.Range["A1:M1"].Find("Doc_Number").Column);
+        }
     }
+
 }

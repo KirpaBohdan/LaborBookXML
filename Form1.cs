@@ -36,16 +36,21 @@ namespace LaborBookXML
 
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(openFileDialog.FileName);
-
+                
+                ExcelParser.FindHeaders(xlApp);
                 ExcelParser.ParseFile(xlApp);
 
                 xText = ExcelParser.GetXmlDocuent();
+
+                if(ExcelParser.records.Count != 0)
+                    button2.Enabled = true;
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText("MyXmlFile", xText);
+            
+            File.WriteAllText("MyXmlFile", xText);
 
             saveFileDialog.Filter = "xml file(*.xml)|*.xml";
             saveFileDialog.OverwritePrompt = true;
