@@ -25,10 +25,8 @@ namespace LaborBookXML
             {
                 for (int i = 2; i <= sheet.Rows.CurrentRegion.EntireRow.Count; i++)
                 {
-                Record record = new Record();
+                    Record record = new Record();
 
-                //MessageBox.Show(sheet.Cells[i, namePositionPairs["EmployeerCode"]].Value.ToString());
-                
                     record.EmployeerCode = sheet.Cells[i, namePositionPairs["EmployeerCode"]].Value.ToString() ?? "";
                     record.EdrpoSign = sheet.Cells[i, namePositionPairs["EdrpoSign"]].Value.ToString();
                     record.NameSign = sheet.Cells[i, namePositionPairs["NameSign"]].Value2.ToString();
@@ -44,7 +42,6 @@ namespace LaborBookXML
                     record.DocNumber = sheet.Cells[i, namePositionPairs["DocNumber"]].Value.ToString();
 
                     records.Add(record);
-                
                 }
             }
             catch
