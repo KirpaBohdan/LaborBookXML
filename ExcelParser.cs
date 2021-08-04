@@ -13,6 +13,8 @@ namespace LaborBookXML
     class ExcelParser
     {
         static List<Record> records = new List<Record>();
+
+
         public static void ParseFile(Excel.Application app)
         {
             Excel.Worksheet sheet = app.Worksheets.get_Item(1);
