@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace LaborBookXML
@@ -74,7 +69,9 @@ namespace LaborBookXML
                 final += "</ACTION_TYPE><ATTRIBUTE_TYPE>";
                 final += record.AttributeType;
                 final += "</ATTRIBUTE_TYPE><ACTION_DT>";
-                final += record.ActionDT.Year + "-" + record.ActionDT.Month + "-" + record.ActionDT.Day;
+                final += record.ActionDT.Year + "-" +
+                        (record.ActionDT.Month < 10 ? "0" + record.ActionDT.Month : record.ActionDT.Month.ToString()) + "-" +
+                        (record.ActionDT.Day < 10 ? "0" + record.ActionDT.Day : record.ActionDT.Day.ToString());
                 final += "</ACTION_DT><ACTION_TEXT>";
                 final += record.ActionText;
                 final += "</ACTION_TEXT><LEAVE_REASON>";
@@ -82,7 +79,9 @@ namespace LaborBookXML
                 final += "</LEAVE_REASON><DOC_TYPE>";
                 final += record.DocType;
                 final += "</DOC_TYPE><DOC_DT>";
-                final += record.DocDT.Year + "-" + record.DocDT.Month + "-" + record.DocDT.Day;
+                final += record.DocDT.Year + "-" +
+                        (record.DocDT.Month < 10 ? "0" + record.DocDT.Month : record.DocDT.Month.ToString()) + "-" +
+                        (record.DocDT.Day < 10 ? "0" + record.DocDT.Day : record.DocDT.Day.ToString());
                 final += "</DOC_DT><DOC_NUMBER>";
                 final += record.DocNumber;
                 final += "</DOC_NUMBER></RECORD>";

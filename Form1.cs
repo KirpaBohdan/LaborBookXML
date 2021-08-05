@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Xml.Linq;
+
 
 namespace LaborBookXML
 {
@@ -65,7 +58,7 @@ namespace LaborBookXML
         private void button2_Click(object sender, EventArgs e)
         {
             
-            File.WriteAllText("MyXmlFile", xText);
+            //File.WriteAllText("MyXmlFile", xText);
 
             saveFileDialog.Filter = "xml file(*.xml)|*.xml";
             saveFileDialog.OverwritePrompt = true;
@@ -102,7 +95,9 @@ namespace LaborBookXML
                     textRecord += "</ACTION_TYPE>\n<ATTRIBUTE_TYPE>";
                     textRecord += record.AttributeType;
                     textRecord += "</ATTRIBUTE_TYPE>\n<ACTION_DT>";
-                    textRecord += record.ActionDT.Year + "-" + record.ActionDT.Month + "-" + record.ActionDT.Day;
+                    textRecord += record.ActionDT.Year + "-" + 
+                        (record.ActionDT.Month < 10 ? "0" + record.ActionDT.Month : record.ActionDT.Month.ToString()) + "-" + 
+                        (record.ActionDT.Day < 10? "0" + record.ActionDT.Day : record.ActionDT.Day.ToString());
                     textRecord += "</ACTION_DT>\n<ACTION_TEXT>";
                     textRecord += record.ActionText;
                     textRecord += "</ACTION_TEXT>\n<LEAVE_REASON>";
@@ -110,7 +105,9 @@ namespace LaborBookXML
                     textRecord += "</LEAVE_REASON>\n<DOC_TYPE>";
                     textRecord += record.DocType;
                     textRecord += "</DOC_TYPE>\n<DOC_DT>";
-                    textRecord += record.DocDT.Year + "-" + record.DocDT.Month + "-" + record.DocDT.Day;
+                    textRecord += record.DocDT.Year + "-" +
+                        (record.DocDT.Month < 10 ? "0" + record.DocDT.Month : record.DocDT.Month.ToString()) + "-" +
+                        (record.DocDT.Day < 10 ? "0" + record.DocDT.Day : record.DocDT.Day.ToString());
                     textRecord += "</DOC_DT>\n<DOC_NUMBER>";
                     textRecord += record.DocNumber;
                     textRecord += "</DOC_NUMBER>\n</RECORD>";
