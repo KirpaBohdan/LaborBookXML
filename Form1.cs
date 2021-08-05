@@ -121,5 +121,9 @@ namespace LaborBookXML
                     richTextBox1.Text = xText;
             }
         }
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

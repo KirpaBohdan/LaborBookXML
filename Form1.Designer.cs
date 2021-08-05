@@ -96,7 +96,7 @@ namespace LaborBookXML
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(13, 111);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(223, 95);
+            this.listBox1.Size = new System.Drawing.Size(223, 173);
             this.listBox1.TabIndex = 5;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_OnItemClick);
             // 
@@ -113,6 +113,7 @@ namespace LaborBookXML
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "LaborBook";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
