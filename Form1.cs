@@ -69,6 +69,7 @@ namespace LaborBookXML
             {
                 File.WriteAllText(saveFileDialog.FileName, xText);
                 MessageBox.Show("Файл сохранен!");
+                saveFileDialog.Dispose();
             }
         }
 
